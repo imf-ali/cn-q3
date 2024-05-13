@@ -1,0 +1,24 @@
+<div class="track-list">
+  <% tasks.map((task) => { %>
+    <div class="track-item">
+      <h3><%= task.title %></h3>
+      <div><%= task.time %></div>
+      <b><%= task.days[task.days.length - 1].status == 'NONE' ? '' : task.days[task.days.length - 1].status %></b>
+      <form id="status-form" action="/tracker/update/<%= task.id %>" method="post">
+        <select name="status">
+          <option value="DONE">DONE</option>
+          <option value="NOT DONE">NOT DONE</option>
+          <option value="NONE">CLEAR</option>
+        </select>
+        <input style="display: none;" type="datetime-local" name="day" value="<%= task.days[task.days.length - 1].day.toISOString().slice(0, 16) %>">
+        <input type="submit" value="Update Status">
+      </form>
+    </div>
+  <% }) %>
+</div>
+
+<form class="add-item" method="post">
+  <input name="title" type="text" placeholder="Enter work name">
+  <input name="time" type="time" placeholder="Enter the time">
+  <button>Add Item</button>
+</form>

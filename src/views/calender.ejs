@@ -1,0 +1,21 @@
+<div class="calender">
+  <div class="calender-grid">
+    <div class="grid-item"></div>
+    <% dateList.map((date) => { %>
+      <div class="grid-item"><%= date %></div>
+    <% }) %>
+  </div>
+
+  <% tasks.map((task)=> { %>
+    <div class="calender-grid">
+      <div class="grid-item-box"><%= task.title %></div>
+      <% for(let i=0; i < 7; i++) { %>
+        <% if(task.days.length < 7 - i) { %>
+          <div class="grid-item-box"></div>
+        <% } else { %>
+          <div class="grid-item-box"><%= task.days[ 7 - i - 1].status == 'NONE' ? '' : task.days[ 7 - i - 1].status == 'DONE' ? '✔' : '❌' %></div>
+        <% } %>
+      <% } %>
+    </div>
+    <% }) %>
+</div>
